@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HalamanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Halaman.index');
 });
+
+Route::get('/tentang', function () {
+    return view('Halaman.tentang');
+});
+
+Route::get('/kontak',[HalamanController::class,'kontak']);
