@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HalamanController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,7 @@ Route::get('/tentang', function () {
 });
 
 Route::get('/kontak',[HalamanController::class,'kontak']);
+
+Route::get('/siswa',[SiswaController::class,'index']);
+
+Route::get('/siswa/{id}',[SiswaController::class,'detail']);
