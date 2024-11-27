@@ -25,6 +25,7 @@
             @endforeach
         </tbody>
     </table>
+    {{-- code bagian paginate yg ada di contoller --}}
     {{$data->links()}}
     {{-- supaya tampilan bagus edit bagian app/providers/appservice --}}
 @endsection

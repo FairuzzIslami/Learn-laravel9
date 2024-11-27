@@ -28,5 +28,17 @@ class SiswaSeeder extends Seeder
             'alamat' => 'mojosongo,Boyolali',
             'created_at' => date('Y-m-d H:i:s')
         ]);
+        DB::table('siswa')->insert([
+            'nama' => 'Damar artha',
+            'no_induk' => 1297,
+            'alamat' => 'Cepogo,Boyolali',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        DB::table('siswa')->insert([
+            'nama' => 'Pangat Zya',
+            'no_induk' => 1187,
+            'alamat' => 'Cepogo,Boyolali',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
     }
 }
