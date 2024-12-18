@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HalamanController;
+use App\Http\Controllers\SiswaContoller;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,15 @@ Route::get('/', function () {
 Route::get('/tentang', function () {
     return view('Halaman.tentang');
 });
-
 Route::get('/kontak',[HalamanController::class,'kontak']);
 
-Route::get('/siswa',[SiswaController::class,'index']);
 
-Route::get('/siswa/{id}',[SiswaController::class,'detail']);
+// resource,memudahkan controller untuk langsung membentuk semua function 
+// dari index,edit,update. jadi gak perlu nambahin route untuk 1 function
+Route::resource('siswa',SiswaContoller::class);
+
+// Route::get('/siswa',[SiswaController::class,'index']);
+// Route::get('/siswa/create',[SiswaController::class,'create']);
+// // ada /{id} karena, terdapat parameter di function detail
+// Route::get('/siswa/{id}',[SiswaController::class,'detail']);
+
