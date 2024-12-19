@@ -30,6 +30,9 @@ Route::get('/kontak',[HalamanController::class,'kontak']);
 // dari index,edit,update. jadi gak perlu nambahin route untuk 1 function
 Route::resource('siswa',SiswaContoller::class);
 
+
+
+
 // Route::get('/siswa',[SiswaController::class,'index']);
 // Route::get('/siswa/create',[SiswaController::class,'create']);
 // // ada /{id} karena, terdapat parameter di function detail

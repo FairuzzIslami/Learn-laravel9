@@ -29,7 +29,7 @@ class SiswaContoller extends Controller
     // untuk menampilkan form jika ingin menambah data
     public function create()
     {
-        //
+        return view('siswa.create');
     }
 
     /**
@@ -40,9 +40,10 @@ class SiswaContoller extends Controller
      */
 
     //untuk menyimpan data yg di massukan
+    // dari create
     public function store(Request $request)
     {
-        //
+        return 'dah ada di store';
     }
 
     /**
@@ -69,7 +70,7 @@ class SiswaContoller extends Controller
     // untuk melakukan edit data
     public function edit($id)
     {
-        //
+        return 'edit bozz';
     }
 
     /**
