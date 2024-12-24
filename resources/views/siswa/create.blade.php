@@ -21,17 +21,38 @@
         {{-- akan menjadi "Expired page " --}}
         
         @csrf
+
+
+        {{-- menampilkan pesan eror keseleuruhan  --}}
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        
+
+        {{-- di from label dan input  --}}
+        {{-- harus di berikan name,id,for --}}
+        {{-- id dan for berguna untuk menyambungkan elemen label dan input (opsional) --}}
+        {{-- name itu berguna untuk menerima request data dari laravel(Wajibbb) --}}
         <div class="mb-5">
             <label for="no_induk" class="form-label">No induk</label>
-            <input type="email" class="form-control" id="no_induk">
+            <input type="text" class="form-control" id="no_induk" 
+            name="no_induk" value="{{Session::get('no_induk')}}">
         </div>
         <div class="mb-3">
             <label for="nama" class="form-label">Nama Siswa</label>
-            <input type="email" class="form-control" id="nama">
+            <input type="text" class="form-control" 
+            id="nama" name="nama" value="{{Session::get('nama')}}">
         </div>
         <div class="mb-3">
             <label for="alamat" class="form-label">Alamat</label>
-            <textarea name="" id="alamat" class="form-control"></textarea>
+            <textarea name="alamat" id="alamat" class="form-control">{{Session::get('alamat')}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

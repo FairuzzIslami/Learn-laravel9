@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SiswaContoller extends Controller
 {
@@ -16,7 +17,7 @@ class SiswaContoller extends Controller
     // untuk menampilkan data
     public function index()
     {
-        $data = Siswa::orderBy('Nama','asc')->paginate(1);
+        $data = Siswa::orderBy('Nama','asc')->paginate(5);
         return view('siswa.siswa')->with('data',$data);
     }
 
@@ -43,7 +44,48 @@ class SiswaContoller extends Controller
     // dari create
     public function store(Request $request)
     {
-        return 'dah ada di store';
+
+        Session::flash('no_induk',$request->no_induk);
+        Session::flash('nama',$request->nama);
+        Session::flash('alamat',$request->alamat);
+
+        // validasi di laravel berguna untuk,memastikan data yg dari create
+        // bisa sesuai dgn aturan validasi yg di ingin kan 
+        // contoh: 
+        // nama => 'required|string' -> nama itu harus di isi dan wajib tulisan
+        // umur => 'required|numeric' -> umur harus di isi dan wajib angka 
+
+        // proses validasi
+        $validate = $request->validate([
+            'no_induk' => 'required|numeric',
+            'nama' => 'required|string',
+            'alamat' => 'required|string'
+        ],
+
+        // menampilkan pesan sesuai yg kita inginkan
+        // ada deafulnya tapi kalo di custom ya gak papa
+
+        [
+            'no_induk.required' => 'No induk Wajib dalam angka',
+            'nama.required' => 'Nama Wajib di isi',
+            'alamat.required' => 'Alamat Wajib di isi'
+        ]
+    );
+
+        // bisa terhubung karena ada value di blade di input yaitu NAME
+        // penyimpanan data
+        $data = [
+            'no_induk' => $request->input('no_induk'),
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat'),
+        ];
+
+        //menyimpan data di table siswa
+        // apa saja kolom yg di massukan
+        Siswa::create($data);
+
+        // redirec mengarah pada blade siswa 
+        return redirect('/siswa')->with('success', 'Pesan berhasil di kirim');
     }
 
     /**

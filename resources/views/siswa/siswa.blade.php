@@ -3,6 +3,13 @@
 @section('konten')
 
     <a href="/siswa/create" class="btn btn-primary">+Tambah data siswa</a>
+
+    @if ((Session::get('success')))
+            <div class="alert alert-success alert-block">
+                {{ Session::get('success') }}
+            </div>
+    @endif
+    
     <table class="table">
         <thead>
             <tr>
