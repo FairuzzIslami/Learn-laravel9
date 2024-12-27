@@ -17,7 +17,8 @@ class SiswaContoller extends Controller
     // untuk menampilkan data
     public function index()
     {
-        $data = Siswa::orderBy('Nama','asc')->paginate(5);
+        // elequen
+        $data = Siswa::orderBy('Nama','asc')->paginate(5); //->get(); // nampilin semua data
         return view('siswa.siswa')->with('data',$data);
     }
 
@@ -85,6 +86,7 @@ class SiswaContoller extends Controller
         Siswa::create($data);
 
         // redirec mengarah pada blade siswa 
+        // dan ketika mendapatkan data baru maka akan menampilkanm pesan
         return redirect('/siswa')->with('success', 'Pesan berhasil di kirim');
     }
 
@@ -112,7 +114,16 @@ class SiswaContoller extends Controller
     // untuk melakukan edit data
     public function edit($id)
     {
-        return 'edit bozz';
+        // laravel elequen
+        // adalah untuk memanipulasi dan mengakses data  yg telah di simpan di database
+        // elequen di gunakan di contorller bagian edit
+        // mirip dgn query builder tetapi elequen lebih singkat
+
+        //logikanya
+        // model siswa akan di filter oleh where dan where akan memilih 
+        // kolom yaitu no_induk dari table lalu di ambil satu baris data tsb dari first
+        $data = Siswa::where('no_induk',$id)->first();
+        return view('siswa.edit')->with('data',$data);
     }
 
     /**
@@ -126,7 +137,7 @@ class SiswaContoller extends Controller
     // untuk meng update data
     public function update(Request $request, $id)
     {
-        //
+        return 'testing update';
     }
 
     /**

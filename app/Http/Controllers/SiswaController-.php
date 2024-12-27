@@ -20,7 +20,7 @@ class SiswaController extends Controller
 
         // ->get() = buat mengambil semua data yg telah di urutkan
         // ->paginate(1) = membagi data ke halaman kecil, memudahkan tampilan data yang banyak. 
-        $data = Siswa::orderBy('Nama','asc')->paginate(1);
+        $data = Siswa::orderBy('Nama','asc')->paginate(5); 
         return view('siswa.siswa')->with('data',$data);
     }
 

@@ -33,9 +33,6 @@
             </ul>
         </div>
         @endif
-
-        
-
         {{-- di from label dan input  --}}
         {{-- harus di berikan name,id,for --}}
         {{-- id dan for berguna untuk menyambungkan elemen label dan input (opsional) --}}

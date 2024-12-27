@@ -30,7 +30,12 @@
                     {{-- route siswa dan akan nampilkan url no induknya --}}
                     {{-- no induk karena unique selain itu maka akan eror --}}
                     {{-- ada di controller siswa yg detail --}}
-                    <td><a href="{{url('/siswa/'.$item->no_induk)}}" class="btn btn-primary">Detail</a></td>
+                    <td>
+                        {{-- Operator (.) itu bergunan untuk menggabungkan elemen string dan variable --}}
+                        {{-- Operator (,) Memisahkan argument kayak params  --}}
+                        <a href="{{url('/siswa/'.$item->no_induk)}}" class="btn btn-primary">Detail</a>
+                        <a href="{{url('/siswa/'.$item->no_induk.'/edit')}}" class="btn btn-warning">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
