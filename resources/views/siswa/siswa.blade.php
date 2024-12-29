@@ -2,7 +2,7 @@
 
 @section('konten')
 
-    <a href="/siswa/create" class="btn btn-primary">+Tambah data siswa</a>
+    <a href="/siswa/create" class="btn btn-primary mb-3">+Tambah data siswa</a>
 
     @if ((Session::get('success')))
             <div class="alert alert-success alert-block">
@@ -35,6 +35,11 @@
                         {{-- Operator (,) Memisahkan argument kayak params  --}}
                         <a href="{{url('/siswa/'.$item->no_induk)}}" class="btn btn-primary">Detail</a>
                         <a href="{{url('/siswa/'.$item->no_induk.'/edit')}}" class="btn btn-warning">Edit</a>
+                        <form class="d-inline" action="{{'/siswa/'.$item->no_induk}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="alert('yakin hapus data anda?')">Delete</button>
+                        </form>                        
                     </td>
                 </tr>
             @endforeach

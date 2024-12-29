@@ -57,17 +57,19 @@ class SiswaContoller extends Controller
         // umur => 'required|numeric' -> umur harus di isi dan wajib angka 
 
         // proses validasi
-        $validate = $request->validate([
+        $request->validate([
             'no_induk' => 'required|numeric',
             'nama' => 'required|string',
             'alamat' => 'required|string'
         ],
 
+        // di array ke 2 validasi , untuk pesan
         // menampilkan pesan sesuai yg kita inginkan
         // ada deafulnya tapi kalo di custom ya gak papa
 
         [
-            'no_induk.required' => 'No induk Wajib dalam angka',
+            'no_induk.required' => 'No induk Wajib di isi',
+            'no_induk.numeric' => 'No induk Wajib di isi dalam angka',
             'nama.required' => 'Nama Wajib di isi',
             'alamat.required' => 'Alamat Wajib di isi'
         ]
@@ -116,7 +118,6 @@ class SiswaContoller extends Controller
     {
         // laravel elequen
         // adalah untuk memanipulasi dan mengakses data  yg telah di simpan di database
-        // elequen di gunakan di contorller bagian edit
         // mirip dgn query builder tetapi elequen lebih singkat
 
         //logikanya
@@ -137,7 +138,24 @@ class SiswaContoller extends Controller
     // untuk meng update data
     public function update(Request $request, $id)
     {
-        return 'testing update';
+        // kenapa harus validasi lagi karena
+        // kan harus memasukan data baru jadi harus validasi 
+        // buat update
+        $validasi = $request->validate([
+            'nama' => 'required|string',
+            'alamat' => 'required|string'
+        ],
+        [
+            'nama.required' => 'Nama Wajib di isi',
+            'alamat.required' => 'Alamat Wajib di isi'
+        ]);
+
+        // elequen update
+        Siswa::where('no_induk',$id)->update($validasi);
+
+        // Ketika sudah di update model nya maka 
+        // di blade akan menampilkan pesan sucses
+        return redirect('/siswa')->with('success','data berhasil di update');
     }
 
     /**
@@ -150,6 +168,12 @@ class SiswaContoller extends Controller
     // untuk menghapus data
     public function destroy($id)
     {
-        //
+        // langsung di delete 1 datanya 
+        // jadi gak usah make validasi
+        // karena hanya menghapus 1 data
+        Siswa::where('no_induk',$id)->delete();
+        // Ketika sudah di Delete model nya maka 
+        // di blade akan menampilkan pesan sucses
+        return redirect('/siswa')->with('success','data berhasil di Hapus');
     }
 }

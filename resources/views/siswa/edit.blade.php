@@ -5,6 +5,7 @@
     <h3 class="fw-bold py-3">Tambahkan data siswa</h3>
     <h4><a href="/siswa" class="btn btn-secondary ">Kembali</a></h4>
 
+    {{-- action nya menuju ke controller update --}}
     <form style="margin-top: 30px" method="POST" action="{{'/siswa/'.$data->no_induk}}">
         @csrf
         {{-- Kalo mau Ke controlller update --}}
